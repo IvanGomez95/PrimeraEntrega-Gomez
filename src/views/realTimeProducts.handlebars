@@ -1,0 +1,48 @@
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-6 d-flex justify-content-center">
+            <form class="m-3" id="addForm">
+                <input type="text" name="title" id="title" placeholder="Nombre del producto" class="text-center form-control mb-2">
+                <input type="text" name="price" id="price" placeholder="Precio del producto" class="text-center form-control mb-2">
+                <input type="text" name="description" id="description" placeholder="Descripción del producto" class="text-center form-control mt-2">
+                <button type="submit" class="mt-2 ms-4 btn btn-primary btn-block">Agregar producto</button>
+            </form>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center">
+            <form class="m-3" id="deleteForm">
+                <input type="text" name="id" id="id" placeholder="ID del producto" class="text-center form-control mb-2">
+                <button type="submit" class="ms-4 btn btn-danger btn-block">Eliminar producto</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="productsList">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Lista de productos</h1>
+                <div class="d-flex flex-wrap justify-content-center mt-5">
+                    {{#each products}}
+                        <div class="card m-1" style="width: 18rem;">
+                            <div class="text-center tarjeta">
+                                <h5 class="card-title">{{this.title}}</h5>
+                                <p class="card-text">{{this.description}}</p>
+                                <p class="card-text">${{this.price}}</p>
+                                <a href="/productos/{{this.id}}" class="btn btn-primary hover-btn">Ver más</a>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="/js/index.js"></script>
+
+

@@ -1,0 +1,13 @@
+.hover-btn{
+    border: 1px solid black;
+    background-color:darkblue;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.5s;
+}
+
+.tarjeta{
+    border: 5px solid black;
+}
