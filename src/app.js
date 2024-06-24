@@ -4,9 +4,12 @@ import viewRoutes from "./router/views.routes.js"
 import __dirname from './dirname.js';
 import handlebars from "express-handlebars";
 import { Server } from 'socket.io';
+import { connectMongoDB } from './config/mongoDB.config.js';
 
 const PORT = 8080;
 const app = express ();
+
+connectMongoDB ();
 
 
 app.use (express.urlencoded ({extended:true}));
