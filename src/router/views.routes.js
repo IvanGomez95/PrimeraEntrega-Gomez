@@ -11,7 +11,7 @@ router.get ("/", async (req, res) => {
         res.render ("home", {products, styles: "index.css"});
     }catch (error) {
         console.log(error);
-        res.status (500).json ({error: "Error interno del servidor"});
+        res.status (500).json ({error: "Internal server error"});
     }    
 })
 
@@ -22,7 +22,7 @@ router.get ("/realtimeproducts", async (req, res) => {
         res.render ("realTimeProducts", {products, styles: "index.css"});
     }catch (error) {
         console.log(error);
-        res.status (500).json ({error: "Error interno del servidor"});
+        res.status (500).json ({error: "Internal server error"});
     }    
 })
 
@@ -35,7 +35,7 @@ router.post ("/realtimeproducts", async (req, res) => {
         res.render ("realTimeProducts", {styles: "index.css"});
     }catch (error) {
         console.log(error);
-        res.status (500).json ({error: "Error interno del servidor"});
+        res.status (500).json ({error: "Internal server error"});
     }    
 })
 
@@ -48,7 +48,7 @@ router.delete ("/realtimeproducts", async (req, res) => {
         res.render ("realTimeProducts", {styles: "index.css"});
     }catch (error) {
         console.log(error);
-        res.status (500).json ({error: "Error interno del servidor"});
+        res.status (500).json ({error: "Internal server error"});
     }    
 })
 

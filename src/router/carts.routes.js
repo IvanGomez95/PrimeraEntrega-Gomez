@@ -9,11 +9,11 @@ router.post ("/", async (req, res) => {
     try {
         const cart = await cartDao.create ();
 
-        res.status (201).json({status: "success", cart});
+        res.status (201).json({status: "Success", cart});
 
     } catch (error) {
         console.log(error);
-        res.status (500).json ({status: "Error", msg: "Error interno del servidor"});
+        res.status (500).json ({status: "Error", msg: "Internal server error"});
     }
 });
 
@@ -22,13 +22,13 @@ router.get ("/:cid", async (req, res) => {
     try {
         const { cid } = req.params;
         const cart = await cartDao.getById (cid);
-        if (!cart) return res.status (404).json ({status: "Error", msg: `El carrito con ID ${cid} no existe`});
+        if (!cart) return res.status (404).json ({status: "Error", msg: `The cart with ID ${cid} does not exist`});
 
-        res.status (200).json({status: "success", cart});
+        res.status (200).json({status: "Success", cart});
 
     } catch (error) {
         console.log(error);
-        res.status (500).json ({status: "Error", msg: "Error interno del servidor"});
+        res.status (500).json ({status: "Error", msg: "Internal server error"});
     }
 });
 
@@ -39,18 +39,18 @@ router.post ("/:cid/product/:pid", async (req, res) => {
         const { cid, pid } = req.params;
         const product = await productDao.getById(pid);
 
-        if (!product) return res.status (404).json ({status: "Error", msg: `No se encontró el producto con el ID ${pid}`});
+        if (!product) return res.status (404).json ({status: "Error", msg: `Product with ID ${pid} couldn't be found`});
         
         const cart = await cartDao.getById(cid);
-        if (!cart) return res.status (404).json ({status: "Error", msg: `No se encontró el carrito con el ID ${cid}`});
+        if (!cart) return res.status (404).json ({status: "Error", msg: `Cart with ID ${cid} couldn't be found`});
 
         const cartUpdate = await cartDao.addProductToCart(cid, pid);
         
-        res.status (200).json({status: "success", payload: cartUpdate});
+        res.status (200).json({status: "Success", payload: cartUpdate});
 
     } catch (error) {
         console.log(error);
-        res.status (500).json ({status: "Error", msg: "Error interno del servidor"});
+        res.status (500).json ({status: "Error", msg: "Internal server error"});
     }
 });
 
@@ -64,10 +64,10 @@ router.put("/:cid/product/:pid", checkCartAndProductIds, checkQuantity, async (r
 
         const cartUpdate = await cartDao.updateQuantityInCart(cid, pid, Number(quantity));
 
-        res.status(200).json({ status: "success", payload: cartUpdate });
+        res.status(200).json({ status: "Success", payload: cartUpdate });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ status: "Error", msg: "Error interno del servidor" });
+        res.status(500).json({ status: "Error", msg: "Internal server error" });
     }
 });
 
@@ -79,21 +79,21 @@ router.delete("/:cid/product/:pid", async (req, res) => {
 
         const product = await productDao.getById(pid);
         if (!product) {
-            return res.status(404).json({ status: "Error", msg: `No se encontró el producto con el ID ${pid}` });
+            return res.status(404).json({ status: "Error", msg: `Product with ID ${pid} couldn't be found`});
         }
         
         const cart = await cartDao.getById(cid);
         if (!cart) {
-            return res.status(404).json({ status: "Error", msg: `No se encontró el carrito con el ID ${cid}` });
+            return res.status(404).json({ status: "Error", msg: `Cart with ID ${cid} couldn't be found` });
         }
 
         const cartUpdate = await cartDao.deleteProductInCart(cid, pid);
         
-        res.status(200).json({ status: "success", payload: cartUpdate });
+        res.status(200).json({ status: "Success", payload: cartUpdate });
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ status: "Error", msg: "Error interno del servidor" });
+        res.status(500).json({ status: "Error", msg: "Internal server error" });
     }
 });
 
@@ -102,13 +102,13 @@ router.delete ("/:cid", async (req, res) => {
     try {
         const { cid } = req.params;
         const cart = await cartDao.clearAllProductsInCart (cid);
-        if (!cart) return res.status (404).json ({status: "Error", msg: "Carrito no encontrado"});
+        if (!cart) return res.status (404).json ({status: "Error", msg: "Cart not found"});
 
-        res.status (200).json({status: "success", cart});
+        res.status (200).json({status: "Success", cart});
 
     } catch (error) {
         console.log(error);
-        res.status (500).json ({status: "Error", msg: "Error interno del servidor"});
+        res.status (500).json ({status: "Error", msg: "Internal server error"});
     }
 });
 

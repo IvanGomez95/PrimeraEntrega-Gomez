@@ -1,6 +1,8 @@
 import { request, response } from "express";
 import productDao from "../dao/mongoDB/product.dao.js";
 import cartDao from "../dao/mongoDB/cart.dao.js";
+import { verifyToken } from "../utils/jwt.js";
+import passport from "passport";
 
 export const checkProductData = async (req = request, res = response, next) => {
     try {
@@ -42,7 +44,7 @@ export const checkCartAndProductIds = async (req = request, res = response, next
 
         const cart = await cartDao.getById(cid);
         if (!cart) {
-            return res.status(404).json({ status: "Error", msg: `No se encontró el carrito con el ID ${cid}` });
+            return res.status(404).json({ status: "Error", msg: `No se encontró el carrito con el ID ${cid}`});
         }
 
         next();
@@ -66,3 +68,52 @@ export const checkQuantity = (req = request, res = response, next) => {
 
     next();
 };
+
+//Middleware que chequea si el usuario está autorizado y si cuenta con los permisos necesarios
+export const authorization = (role) => {
+    return async (req = request, res = response, next) => {
+      if (!req.user) return res.status(401).json({ status: "error", msg: "Unauthorized" });
+      if (req.user.role != role) return res.status(403).json({ status: "error", msg: "You credentials don't have the authorization to perform this task" });
+      
+      next();
+    };
+};
+
+//Middleware para chequear y validar Tokens
+export const checkToken = async (req = request, res = response, next) => {
+    try {
+      const token = req.cookies.token;
+      if (!token) return res.status(401).json({ status: "Error", msg: "Token has not been provided" });
+  
+      const tokenVerify = verifyToken(token);
+      if (!tokenVerify) return res.status(401).json({ status: "Error", msg: "Invalid Token" });
+  
+      req.user = verifyToken;
+  
+      next();
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ status: "Error", msg: "Internal server error" });
+    }
+};
+
+//Middleware para enviar mensajes personalizados al cliente
+export const passportCall = (strategy) => {
+    return async (req = request, res = response, next) => {
+      passport.authenticate(strategy, (err, user, info) => {
+        if (err) return next(err);
+        if (!user) return res.status(401).json({ status: "Error", msg: info.message ? info.message : info.toString() });
+  
+        req.user = user;
+        next();
+      })(req, res, next);
+    };
+};
+
+
+// export const isUserCart = async (req = request, res = response, next) => {
+//    const { cid } = req.params;
+//    if (req.user.cart !== cid) return res.status (401).json ({status: "Error", msg: "Wrong cart user"});
+   
+//    next();
+// };

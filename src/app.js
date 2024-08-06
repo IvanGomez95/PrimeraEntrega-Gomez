@@ -5,8 +5,12 @@ import __dirname from './dirname.js';
 import handlebars from "express-handlebars";
 import { Server } from 'socket.io';
 import { connectMongoDB } from './config/mongoDB.config.js';
+import envs from "./config/envs.config.js"
+import session from 'express-session';
+import passport from 'passport';
+import { initializePassport } from './config/passport.config.js';
+import cookieParser from 'cookie-parser';
 
-const PORT = 8080;
 const app = express ();
 
 connectMongoDB ();
@@ -22,11 +26,20 @@ app.engine ( "handlebars", handlebars.engine() );
 app.set ("views", __dirname + "/views");
 app.set ("view engine", "handlebars");
 
+app.use (cookieParser());
+app.use (
+    session ({
+        secret: envs.SECRET_CODE,
+        resave: true,
+        saveUninitialized: true,
+    }),
+);
+
+initializePassport();
+app.use (passport.initialize());
+app.use (passport.session());
+
 app.use ("/", viewRoutes);
-
-
-
-
 
 
 app.use ("/api", router);
@@ -35,13 +48,14 @@ app.use ("/api", router);
 
 
 
-const httpServer= app.listen (PORT, ()=> console.log(`Servidor escuchando en el puerto ${PORT}`));
-
+const httpServer= app.listen (envs.PORT, ()=> {
+    console.log(`Server listening on port ${envs.PORT}`);
+});
 
 export const io = new Server (httpServer);
 
 io.on("connection", (socket) => {
-    console.log("Nuevo cliente conectado");
+    console.log("New client connected");
 
 
     

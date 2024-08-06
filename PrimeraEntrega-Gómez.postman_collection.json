@@ -1,8 +1,8 @@
 {
 	"info": {
 		"_postman_id": "70584006-1877-4fdb-b971-f81d16ce3374",
-		"name": "ProyectoFinal-Gómez",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"name": "PrimeraEntrega-Gómez",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "35039757"
 	},
 	"item": [
@@ -23,18 +23,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/api/carts",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"carts"
-							]
-						}
+						"url": "http://localhost:8080/api/carts"
 					},
 					"response": []
 				},
@@ -43,19 +32,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/carts/667882a22e09f5456830deb3",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"carts",
-								"667882a22e09f5456830deb3"
-							]
-						}
+						"url": "http://localhost:8080/api/carts/667882a22e09f5456830deb3"
 					},
 					"response": []
 				},
@@ -73,21 +50,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/api/carts/6678c681bbae29ecf42c8ac9/product/6678a3774578fa28574c5d6d",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"carts",
-								"6678c681bbae29ecf42c8ac9",
-								"product",
-								"6678a3774578fa28574c5d6d"
-							]
-						}
+						"url": "http://localhost:8080/api/carts/6678c681bbae29ecf42c8ac9/product/6678a3774578fa28574c5d6d"
 					},
 					"response": []
 				},
@@ -96,21 +59,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/carts/6678c681bbae29ecf42c8ac9/product/6678a3774578fa28574c5d6d",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"carts",
-								"6678c681bbae29ecf42c8ac9",
-								"product",
-								"6678a3774578fa28574c5d6d"
-							]
-						}
+						"url": "http://localhost:8080/api/carts/6678c681bbae29ecf42c8ac9/product/6678a3774578fa28574c5d6d"
 					},
 					"response": []
 				},
@@ -119,19 +68,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/carts/6678c681bbae29ecf42c8ac9",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"carts",
-								"6678c681bbae29ecf42c8ac9"
-							]
-						}
+						"url": "http://localhost:8080/api/carts/6678c681bbae29ecf42c8ac9"
 					},
 					"response": []
 				}
@@ -187,19 +124,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/products/667881f62e09f5456830deae",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"products",
-								"667881f62e09f5456830deae"
-							]
-						}
+						"url": "http://localhost:8080/api/products/667881f62e09f5456830deae"
 					},
 					"response": []
 				},
@@ -217,18 +142,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/api/products",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"products"
-							]
-						}
+						"url": "http://localhost:8080/api/products"
 					},
 					"response": []
 				},
@@ -246,21 +160,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/api/carts/6678c681bbae29ecf42c8ac9/product/6678a3774578fa28574c5d6d",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"carts",
-								"6678c681bbae29ecf42c8ac9",
-								"product",
-								"6678a3774578fa28574c5d6d"
-							]
-						}
+						"url": "http://localhost:8080/api/carts/6678c681bbae29ecf42c8ac9/product/6678a3774578fa28574c5d6d"
 					},
 					"response": []
 				},
@@ -269,19 +169,69 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/products/66788ac0de2ddea38d4a3bdd",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"products",
-								"66788ac0de2ddea38d4a3bdd"
-							]
-						}
+						"url": "http://localhost:8080/api/products/66788ac0de2ddea38d4a3bdd"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Session",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"alexiscolorado@gmail.com\",\r\n    \"password\":\"LiverpoolMiLocura\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/session/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"Alexis\",\r\n\"last_name\": \"MacAllister\",\r\n\"email\": \"alexiscolorado@gmail.com\",\r\n\"password\": \"LiverpoolMiLocura\",\r\n\"age\": 28\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/session/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Current",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/session/current"
 					},
 					"response": []
 				}
