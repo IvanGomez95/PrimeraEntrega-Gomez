@@ -1,7 +1,7 @@
 import fs from "fs";
 
 let carts = [];
-const pathFile = "./src/dao/fileSystem/data/carts.json";
+const pathFile = "./src/persistence/fileSystem/data/carts.json";
 
 const getCarts = async () => {
   const cartsJson = await fs.promises.readFile(pathFile, "utf-8");
@@ -63,9 +63,9 @@ const deleteAllProducts = async (cid) => {
     carts[index].products = [];
     
     await fs.promises.writeFile(pathFile, JSON.stringify(carts));
-    return { success: true, msg: "Todos los productos han sido eliminados" };
+    return { success: true, msg: "All products have been deleted" };
   } else {
-    return { success: false, msg: "Carrito no encontrado" };
+    return { success: false, msg: "Cart not found" };
   }
 };
 

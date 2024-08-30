@@ -16,7 +16,7 @@ const create = async () => {
 };
 
 const update = async (id, data) => {
-    await cartModel.findByIdAndUpdate(id, data, {new: true});
+    const cartUpdate = await cartModel.findByIdAndUpdate(id, data, {new: true});
     return cartUpdate;
 };
 
@@ -46,7 +46,7 @@ const deleteProductInCart = async (cid, pid) => {
         const cart = await cartModel.findById(cid);
 
         if (!cart) {
-            throw new Error(`No se encontró el carrito con el ID ${cid}`);
+            throw new Error(`Cart with ID ${cid} couldn't be found`);
         }
 
         //Esta parte busca el índice del producto en el carrito
@@ -66,7 +66,7 @@ const deleteProductInCart = async (cid, pid) => {
 
         return cart;
     } catch (error) {
-        throw new Error(`Error al borrar el producto del carrito: ${error.message}`);
+        throw new Error(`Error when deleting product from cart: ${error.message}`);
     }
 };
 

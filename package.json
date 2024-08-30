@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.3",
     "mongoose-paginate-v2": "^1.8.2",
+    "nanoid": "^5.0.7",
     "passport": "^0.7.0",
     "passport-custom": "^1.1.1",
     "passport-google-oauth20": "^2.0.0",

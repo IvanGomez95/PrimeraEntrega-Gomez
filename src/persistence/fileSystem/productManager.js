@@ -2,7 +2,7 @@ let products = [];
 
 import fs from "fs";
 
-const pathFile = "./src/dao/fileSystem/data/products.json";
+const pathFile = "./src/persistence/fileSystem/data/products.json";
 
 const addProduct = async (product) => {
   await getProducts();

@@ -36,5 +36,5 @@ export default {
   create,
   update,
   deleteOne,
-  getByEmail
+  getByEmail,
 };

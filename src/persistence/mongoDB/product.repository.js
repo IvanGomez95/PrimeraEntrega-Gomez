@@ -25,10 +25,20 @@ const deleteOne = async (id) => {
     return product;
 };
 
+const checkProductByCode = async (code) => {
+    try {
+        return await productModel.findOne({ code });
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error when searching product by code");
+    }
+};
+
 export default {
     getAll,
     getById,
     create,
     update,
-    deleteOne
+    deleteOne,
+    checkProductByCode,
 };

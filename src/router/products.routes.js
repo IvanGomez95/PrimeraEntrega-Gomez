@@ -1,99 +1,18 @@
 import { Router } from "express";
-import { authorization, checkProductData, passportCall } from "../middlewares/middlewares.js";
-import productDao from "../dao/mongoDB/product.dao.js";
+import { authorization, checkProductData, checkProductExists, passportCall } from "../middlewares/middlewares.js";
+import productsControllers from "../controllers/products.controllers.js";
 
 const router = Router ();
 
-router.get ("/", passportCall ("jwt"), authorization ("user"), async (req, res) => {
-    try {
-        const { limit, page, sort, category, status } = req.query;
+router.get ("/", passportCall ("jwt"), authorization ("user"), productsControllers.getAllProducts);
 
-        const options = {
-            limit: limit || 10,
-            page: page || 1,
-            sort: {
-                price: sort === "asc" ? 1 : -1
-            },
-            learn: true
-        }
+router.get ("/:pid", checkProductExists, productsControllers.getProductById);
 
-        if (category) {
-            const products = await productDao.getAll({ category }, options);
-            return res.status (200).json({status: "Success", products});
-        }
+router.put ("/:pid", passportCall ("current"), authorization ("admin"), checkProductExists, productsControllers.updateProduct);
 
-        if (status) {
-            const products = await productDao.getAll({ status }, options);
-            return res.status (200).json({status: "Success", products});
-        }
+router.delete ("/:pid", passportCall ("current"), authorization ("admin"), checkProductExists, productsControllers.deleteProduct);
 
-        const products = await productDao.getAll({}, options);
-        res.status (200).json({status: "Success", products});
-
-    } catch (error) {
-        console.log(error);
-        res.status (500).json({status: "Error", msg: "Internal server error"});
-    }
-});
-
-
-router.get ("/:pid", async (req, res) => {
-    try {
-        const { pid } = req.params;
-        const product = await productDao.getById (pid);
-        if (!product) return res.status (404).json ({status: "Error", msg: `Product with ID ${pid} couldn't be found`});
-
-        res.status (200).json({status: "Success", product});
-        
-    } catch (error) {
-        console.log(error);
-        res.status (500).json({status: "Error", msg: "Internal server error"});
-    }
-});
-
-router.put ("/:pid", async (req, res) => {
-    try {
-        const { pid } = req.params;
-        const productData = req.body;
-        const product = await productDao.update (pid, productData);
-        if (!product) return res.status (404).json ({status: "Error", msg: `Product with ID ${pid} couldn't be found`});
-
-        res.status (200).json({status: "Success", product});
-        
-    } catch (error) {
-        console.log(error);
-        res.status (500).json({status: "Error", msg: "Internal server error"});
-    }
-});
-
-router.delete ("/:pid", async (req, res) => {
-    try {
-        const { pid } = req.params;
-        const product = await productDao.deleteOne (pid);
-        if (!product) return res.status (404).json ({status: "Error", msg: `Product with ID ${pid} couldn't be found`});
-
-        res.status (200).json({status: "Success", msg: `Product with ID ${pid} has been deleted`});
-        
-    } catch (error) {
-        console.log(error);
-        res.status (500).json({status: "Error", msg: "Internal server error"});
-    }
-});
-
-router.post ("/", checkProductData, async (req, res) => {
-    try {
-        const productData = req.body;
-        const product = await productDao.create (productData);
-        
-
-        res.status (201).json({status: "Success", product});
-        
-    } catch (error) {
-        console.log(error);
-        res.status (500).json({status: "Error", msg: "Internal server error"});
-    }
-});
-
+router.post ("/", passportCall ("current"), authorization ("admin"), checkProductData, productsControllers.createProduct);
 
 
 export default router;
